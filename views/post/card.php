@@ -1,0 +1,8 @@
+<div class="card mb-3" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title"><?= strip_tags(htmlentities($post->getName())) ?></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><?= $post->getCreatedAt()->format('d F Y') ?></h6>
+        <p class="card-text"><?= $post->getExcerpt() ?></p>
+        <a href="<?= $router->url('post', ['id' => $post->getID(), 'slug' => $post->getSlug()]) ?>" class="card-link btn btn-primary">Voir plus</a>
+    </div>
+</div>
