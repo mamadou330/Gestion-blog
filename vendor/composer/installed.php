@@ -1,24 +1,24 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => 'dd26d826648d6a6fc2b838f15deb619322507823',
     'name' => '__root__',
   ),
   'versions' => 
   array (
     '__root__' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => 'dd26d826648d6a6fc2b838f15deb619322507823',
     ),
     'altorouter/altorouter' => 
     array (
@@ -82,6 +82,15 @@
       array (
       ),
       'reference' => '72ca213014a92223a5d18651ce79ef441c12b694',
+    ),
+    'vlucas/valitron' => 
+    array (
+      'pretty_version' => 'v1.4.5',
+      'version' => '1.4.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c3b4dac8586291990e6398961852e972600ac7b5',
     ),
   ),
 );

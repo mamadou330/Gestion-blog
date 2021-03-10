@@ -18,9 +18,21 @@ class Post
 
     private $categories = [];
 
+    public function setName (string $name): self
+    {   
+        $this->name = $name;
+        return $this;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function setContent (string $content): self
+    {
+        $this->content = $content;
+        return $this;
     }
 
     public function getFormattedContent(): ?string
@@ -49,5 +61,21 @@ class Post
     public function getID(): ?string
     {
         return $this->id;
+    }
+    
+    /**
+     * getCategories
+     *
+     * @return Category[]
+     */
+    public function getCategories (): array 
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): void
+    {
+        $this->categories[] = $category;
+        $category->setPost($this);
     }
 }

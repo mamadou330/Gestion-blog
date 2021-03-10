@@ -30,7 +30,6 @@ class PaginatedQuery
 
     public function getItems(string $classMapping): array
     {
-        dump("Je suis cool");
         if($this->items === null) {
             $currentPage = $this->getCurrentPage();
             $pages = $this->getPages();
