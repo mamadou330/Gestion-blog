@@ -14,7 +14,7 @@
           <a href="#" class="navbar-brand">Mon site</a>
      </nav>
 
-     <div class="conatainer m-5">
+     <div class="container m-5">
           <?= $content ?>
      </div>
 
