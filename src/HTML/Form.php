@@ -18,7 +18,6 @@ class Form
     public function input (string $key, string $label): string
     {
         $value = $this->getValue($key);
-
         return <<<HTML
         <div class="form-group">
             <label for="field{$key}">{$label}</label>
@@ -41,7 +40,25 @@ HTML;
 HTML;
     }
 
-    private function getValue (string $key): string
+    public function select(string $key, string $label, array $options = []): string
+    {
+        $optionHTML = [];
+        $value = $this->getValue($key);
+        foreach ($options as $k => $v) {
+            $selected = in_array($k, $value) ? " selected" : "";
+            $optionHTML[] = "<option value=\"$k\" $selected>$v</option>";
+        }
+        $optionHTML = implode('', $optionHTML);
+        return <<<HTML
+        <div class="form-group">
+            <label for="field{$key}">{$label}</label>
+            <select name="{$key}[]" id="field{$key}" class="{$this->getInputClass($key)}" required multiple>{$optionHTML}</select>
+            {$this->getErrorFeedback($key)}
+        </div>
+HTML;
+    }
+
+    private function getValue (string $key)
     {
         if(is_array($this->data)) {
             return $this->data[$key] ?? null;

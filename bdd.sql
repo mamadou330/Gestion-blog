@@ -1,4 +1,3 @@
-
 -- Pour la base de données nous allons commencer par créer une table qui permettra de sauvegarder les articles.
 CREATE TABLE post (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -43,5 +42,3 @@ CREATE TABLE user (
     password VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 )
-
-

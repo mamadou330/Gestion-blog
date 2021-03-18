@@ -5,7 +5,7 @@ use App\Connection;
 use App\Table\PostTable;
 
 Auth::check();
-
+$router->layout = "admin/layouts/default";
 $title = 'Administration';
 
 $pdo = Connection::getPDO();
@@ -18,11 +18,13 @@ $link = $router->url('admin_posts');
         L'enregistrement a bien été supprimé
     </div>
 <?php endif ?>
-<table class="text-center table table-bordered table-dark">
+<table class="text-center table ">
     <thead>
         <th>#</th>
         <th>Titre</th>
-        <th>Actions</th>
+        <th>
+            <a href="<?= $router->url('admin_post_new') ?> " class="btn btn-primary">Nouveau</a>
+        </th>
     </thead>
     <tbody>
         <?php foreach ($posts as $post) : ?>

@@ -59,13 +59,18 @@ class Post
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
-
         return $this;
     }
 
     public function getID(): ?string
     {
         return $this->id;
+    }
+
+    public function setID (int $id): self
+    {
+        $this->id = $id;
+        return $this;
     }
     
     /**
@@ -76,6 +81,26 @@ class Post
     public function getCategories (): array 
     {
         return $this->categories;
+    }
+
+    /**
+     * getCategories
+     *
+     * @return Category[]
+     */
+    public function setCategories(array $categories): self
+    {
+        $this->categories = $categories;
+        return $this;
+    }
+
+    public function getCategoriesIds (): array
+    {
+        $ids = [];
+        foreach ($this->categories as $category) {
+            $ids[] = $category->getID();
+        }
+        return $ids;
     }
 
     public function addCategory(Category $category): void

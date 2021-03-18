@@ -27,38 +27,45 @@ class PostTable extends Table
     {
         $paginatedQuery = new PaginatedQuery(
             "SELECT p.* 
-            FROM  {$this->table} p 
+                FROM  {$this->table} p 
                 JOIN post_category pc ON pc.post_id = p.id
                 WHERE pc.category_id = {$categoryID}
                 ORDER BY created_at DESC",
-            "SELECT COUNT(category_id) FROM post_category WHERE category_id =  {$categoryID}",
+            "SELECT COUNT(category_id) FROM post_category WHERE category_id = {$categoryID}",
         );
         $posts = $paginatedQuery->getItems(Post::class); 
         (new CategoryTable($this->pdo))->hydratePosts($posts);
         return [$posts, $paginatedQuery];
     }
 
-    public function update(Post $post): void
+    public function createPost(Post $post): void
     {
-        $query = $this->pdo->prepare("UPDATE {$this->table} SET name = :name, slug = :slug, created_at = :created_at, content = :content WHERE id = :id");
-        $ok = $query->execute([
-            'id' => $post->getID(),
+        $id = $this->create([
             'name' => $post->getName(),
             'slug' => $post->getSlug(),
             'content' => $post->getContent(),
             'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s'),
         ]);
-        if ($ok === false) {
-        //    throw new \Exception("Imposible de supprimer l'enregistrement $id dans la table {$this->table}");
-        }
+        $post->setID($id);
     }
 
-    public function delete(int $id): void
+
+    public function updatePost(Post $post): void
     {
-        $query = $this->pdo->prepare("DELETE FROM  {$this->table} WHERE id = ?");
-        $ok = $query->execute([$id]);
-        if($ok === false) {
-            throw new \Exception("Imposible de supprimer l'enregistrement $id dans la table {$this->table}");
+        $this->update([
+            'name' => $post->getName(),
+            'slug' => $post->getSlug(),
+            'content' => $post->getContent(),
+            'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s')
+        ], $post->getID());
+    }  
+  
+    public function attachCategories (int $id, array $categories)
+    {
+       $this->pdo->exec('DELETE FROM post_category WHERE post_id = ' . $id);
+        $query = $this->pdo->prepare('INSERT INTO post_category SET post_id = ? , category_id = ? ');
+        foreach ($categories as $categorie) {
+            $query->execute([$id, $categorie]);
         }
     }
 }
