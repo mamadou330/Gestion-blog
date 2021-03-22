@@ -25,7 +25,7 @@ abstract class Table
         $query = $this->pdo->prepare('SELECT * FROM ' .$this->table. ' WHERE id = :id');
         $query->execute(['id' => $id]);
         $query->setFetchMode(PDO::FETCH_CLASS, $this->class);
-        $result =  $query->fetch() ?: null;
+        $result =  $query->fetch();
         if ($result === false) {
             throw new NotFoundException($this->table, $id);
         }
