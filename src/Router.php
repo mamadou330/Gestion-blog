@@ -49,7 +49,12 @@ class Router
      public function run(): self
      {
           $match = $this->router->match();
-          $view = $match['target'] ?: 'e404';
+          try {
+               $view = $match['target'];
+          } catch (\ErrorException $e) {
+               require $this->viewPath . DIRECTORY_SEPARATOR . 'e404.php';
+               exit();
+          }
           $params = $match['params'];
           $router = $this;
           $isAdmin = strpos($view, 'admin/') !== false;

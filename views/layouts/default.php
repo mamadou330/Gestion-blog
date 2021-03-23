@@ -5,14 +5,11 @@
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title><?= isset($title) ? e($title) : 'Mon Site' ?></title>
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
+     <?php require_once __DIR__ . DIRECTORY_SEPARATOR . 'css.php' ?>
 </head>
 
 <body class="d-flex flex-column h-100">
-     <nav class="navbar navbar-dark bg-primary">
-          <a href="#" class="navbar-brand">Mon site</a>
-     </nav>
+     <?php require_once __DIR__ . DIRECTORY_SEPARATOR . 'nav.php' ?>
 
      <div class="container m-5">
           <?= $content ?>
